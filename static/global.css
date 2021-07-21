@@ -1,0 +1,70 @@
+body {
+  padding: 2em;
+  font-family: -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  margin: auto;
+  color: #eee;
+  line-height: 3ex;
+  overflow-x: hidden;
+  background: var(--bodyBg);
+  color: var(--textColor);
+  transition: 0.3s;
+}
+* {
+  scroll-margin-top: 100px;
+}
+div#svelte {
+  max-width: 50em;
+  margin: auto;
+  margin-bottom: 3em;
+  width: 100%;
+}
+ul li {
+  margin: 1ex 0;
+}
+a {
+  color: cornflowerblue;
+  text-decoration: none;
+}
+a:hover {
+  color: orange;
+}
+code {
+  padding: 1pt 3pt;
+  border-radius: 3pt;
+  font-size: 1.3em;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+pre code {
+  background-color: transparent;
+}
+pre {
+  border-radius: 1ex;
+  font-size: 0.7em;
+  background: black;
+}
+a code {
+  color: white;
+}
+blockquote {
+  border-left: 3pt solid cornflowerblue;
+  padding: 1px 8pt;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 1em 0;
+}
+:is(h2, h3, h4, h5, h6) {
+  margin-top: 2em;
+  transition: 0.3s;
+}
+.toc-clicked {
+  color: cornflowerblue;
+}
+
+/* style links added by rehype-autolink-headings, see svelte.config.js */
+:where(h2, h3, h4, h5, h6) a {
+  transition: 0.3s;
+  margin-left: 4pt;
+  opacity: 0;
+}
+:where(h2, h3, h4, h5, h6):hover a {
+  opacity: 1;
+}
