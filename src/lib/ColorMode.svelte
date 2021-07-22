@@ -4,22 +4,32 @@
   import { colorMode, colorModeKey } from './stores'
 
   export let colorsByMode: Record<string, Record<string, string>>
-  export let otherColors: Record<string, string>
+  export let otherColors: Record<string, string> = {}
   export let noKeyboardShortcuts = false
 
-  const setModeFactory = (mode: string) => () => {
+  function setColorMode(mode: string) {
     $colorMode = mode
     applyColors()
   }
 
+  // subscribe to colorMode changes in onMount so it doesn't run during SSR where `document` is unavailable
   onMount(() => colorMode.subscribe(applyColors))
 
   function applyColors() {
     // If colorMode is `auto` we pick dark or light depending on prefersDark media query.
     const prefersDark = window.matchMedia(`(prefers-color-scheme: dark)`).matches
-    let activeMode: `light` | `dark`
-    if ($colorMode === `auto`) activeMode = prefersDark ? `dark` : `light`
-    else activeMode = $colorMode
+
+    if (![`light`, `dark`, `auto`].includes($colorMode)) {
+      // This can happen e.g. during development of a new UI component that modifies $colorMode incorrectly.
+      const fixColorMode = prefersDark ? `dark` : `light`
+      console.error(
+        `Warning: colorMode had invalid value ${$colorMode}. It was auto-set to ${fixColorMode}.`
+      )
+      $colorMode = fixColorMode
+    }
+
+    let activeMode = $colorMode as `light` | `dark` | `auto`
+    if (activeMode === `auto`) activeMode = prefersDark ? `dark` : `light`
 
     // Define CSS vars for moded colors (both during SSR and in production).
     for (const [key, val] of Object.entries(colorsByMode[activeMode])) {
@@ -50,9 +60,9 @@
 
   const handleKeydown = (event: KeyboardEvent) => {
     if (!event.ctrlKey) return
-    if (event.key === `1`) setModeFactory(`light`)()
-    if (event.key === `2`) setModeFactory(`dark`)()
-    if (event.key === `3`) setModeFactory(`auto`)()
+    if (event.key === `1`) setColorMode(`light`)
+    if (event.key === `2`) setColorMode(`dark`)
+    if (event.key === `3`) setColorMode(`auto`)
   }
 </script>
 

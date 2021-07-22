@@ -1,5 +1,6 @@
 <script>
   import ModalColorPicker from '../lib/ModalColorPicker.svelte'
+  import DropDownColorPicker from '../lib/DropDownColorPicker.svelte'
   import MinimalColorPicker from '../lib/MinimalColorPicker.svelte'
   import ColorMode from '../lib/ColorMode.svelte'
   import GitHubCorner from '../components/GitHubCorner.svelte'
@@ -12,7 +13,7 @@
 <GitHubCorner href="https://github.com/janosh/svelte-color-mode" />
 
 <h1>
-  <img src="/static/favicon.svg" alt="Logo" />&nbsp;Svelte Color Mode
+  <img src="/favicon.svg" alt="Logo" />&nbsp;Svelte Color Mode
 </h1>
 
 [![NPM version](https://img.shields.io/npm/v/svelte-color-mode?color=blue&logo=NPM)](https://npmjs.com/package/svelte-color-mode)
@@ -22,10 +23,13 @@
 
 Click the moon icon below to open a color mode picker in a modal.
 
-<div style="width: 50px; height: 50px; background: black; border-radius: 5px; display: flex; place-content: center;">
-  <ModalColorPicker iconSize="2em" />
-</div>
+<div style="display: flex; gap: 4em; align-items: center;">
+  <div style="width: 50px; height: 50px; background: black; border-radius: 5px; display: flex; place-content: center;">
+    <ModalColorPicker iconSize="2em" />
+  </div>
 
+  <DropDownColorPicker />
+</div>
 
 ## Props
 
@@ -54,7 +58,7 @@ You can hook whatever UI component you want up to the `colorMode` store. All tha
   import { colorMode } from './stores'
 </script>
 
-<p>Current Colormode: <code>$colorMode = '{$colorMode}'</code></p>
+<p>Current color mode: <code>$colorMode = '{$colorMode}'</code></p>
 
 <button on:click={() => ($colorMode = `dark`)}>Dark</button>
 <button on:click={() => ($colorMode = `light`)}>Light</button>
@@ -81,7 +85,6 @@ Used in production on these sites:
 - [Afara](https://afara.foundation)
 - [Ocean artUp](https://ocean-artup.eu)
 - [Studenten bilden Schüler](https://studenten-bilden-schueler.de)
-
 
 <style>
   :global(:root) {

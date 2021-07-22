@@ -4,7 +4,7 @@ const hasLocalStorage = typeof localStorage !== `undefined`
 
 export const colorModeKey = `colorMode`
 
-export const colorMode = writable(
+export const colorMode = writable<string>(
   (hasLocalStorage && localStorage[colorModeKey]) || `auto`
 )
 
