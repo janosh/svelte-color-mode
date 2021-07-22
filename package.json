@@ -5,7 +5,7 @@
   "homepage": "https://svelte-color-mode.netlify.app",
   "repository": "https://github.com/janosh/svelte-color-mode",
   "license": "MIT",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "bugs": {
     "url": "https://github.com/janosh/svelte-color-mode/issues"
