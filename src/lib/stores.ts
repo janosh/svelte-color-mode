@@ -10,6 +10,6 @@ export const colorMode = writable<string>(
 
 if (hasLocalStorage) {
   colorMode.subscribe(
-    (val) => (localStorage[colorModeKey] = val)
+    (val: string) => (localStorage[colorModeKey] = val)
   )
 }

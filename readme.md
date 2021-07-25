@@ -2,12 +2,17 @@
   <img src="static/favicon.svg" alt="Svelte Color Mode" height=150>
 </p>
 
-# Svelte Color Mode
+<h1 align="center">Svelte Color Mode</h1>
 
-[![NPM version](https://img.shields.io/npm/v/svelte-color-mode?color=blue&logo=NPM)](https://npmjs.com/package/svelte-color-mode)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/0238699e-17a8-4423-85de-a5ca30baff0d/deploy-status)](https://app.netlify.com/sites/svelte-color-mode/deploys)
+<h4 align="center">
+
+  [![NPM version](https://img.shields.io/npm/v/svelte-color-mode?color=blue&logo=NPM)](https://npmjs.com/package/svelte-color-mode)
+  [![Netlify Status](https://api.netlify.com/api/v1/badges/0238699e-17a8-4423-85de-a5ca30baff0d/deploy-status)](https://app.netlify.com/sites/svelte-color-mode/deploys)
+</h4>
 
 **[Live Demo](https://svelte-color-mode.netlify.app)**
+
+SSR-compatible, flash-free, `localStorage`-persisted color mode + multiple Svelte UI components for selecting current color mode.
 
 ## Installation
 
