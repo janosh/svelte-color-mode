@@ -7,6 +7,13 @@
   export let otherColors: Record<string, string> = {}
   export let noKeyboardShortcuts = false
 
+  // Rename component props to prevent AcornJS from deduplicating variables
+  // in applyColors e.g. colorsByMode to colorsByMode2. This oocur if e.g.
+  // the user had a colors.js module with export const colorsByMode in it.
+  // colorsByMode2 would break the script this component adds to <svelte:head>.
+  $: __colorsByMode__ = colorsByMode
+  $: __otherColors__ = otherColors
+
   function setColorMode(mode: string) {
     $colorMode = mode
     applyColors()
@@ -20,40 +27,41 @@
     const prefersDark = window.matchMedia(`(prefers-color-scheme: dark)`).matches
 
     if (![`light`, `dark`, `auto`].includes($colorMode)) {
-      // This can happen e.g. during development of a new UI component that modifies $colorMode incorrectly.
-      const fixColorMode = prefersDark ? `dark` : `light`
+      // Invalid color modes can occur e.g. during development of a new UI component that modifie
+      // $colorMode incorrectly. To not be stuck in a broken state, we restore a sensible state here.
+      const fixedColorMode = prefersDark ? `dark` : `light`
       console.error(
-        `Warning: colorMode had invalid value ${$colorMode}. It was auto-set to ${fixColorMode}.`
+        `Warning: colorMode had invalid value '${$colorMode}'. It was reset to '${fixedColorMode}'.`
       )
-      $colorMode = fixColorMode
+      $colorMode = fixedColorMode
     }
 
     let activeMode = $colorMode as `light` | `dark` | `auto`
     if (activeMode === `auto`) activeMode = prefersDark ? `dark` : `light`
 
     // Define CSS vars for moded colors (both during SSR and in production).
-    for (const [key, val] of Object.entries(colorsByMode[activeMode])) {
-      if (val === undefined) console.error(`CSS variable ${key} is undefined`)
+    for (const [key, val] of Object.entries(__colorsByMode__[activeMode])) {
+      if (!val) console.error(`colorsByMode has invalid value ${val} for key '${key}'`)
       document.body.style.setProperty(`--${key}`, val)
     }
 
     // Define CSS vars for non-moded colors as well while we're at it
-    for (const [key, val] of Object.entries(otherColors)) {
+    for (const [key, val] of Object.entries(__otherColors__)) {
       document.body.style.setProperty(`--${key}`, val)
     }
   }
 
-  // boundFunc and <svelte:head> below provide SSR support
-  // we modify a stringified version of applyColors so it can run before hydration
-  // and prevent color flashes on page load
+  // boundFunc runs inside <svelte:head> to provide SSR support.
+  // TODO: Find a way to run applyColors before hydration to prevent
+  // color flashes on page load.
   const boundFunc = String(applyColors).replace(/\$colorMode/g, `colorMode`)
 
   /* eslint-disable no-useless-escape */
   const script = `
     <script>
       const colorMode = localStorage.${colorModeKey} || 'auto'
-      const colorsByMode = ${JSON.stringify(colorsByMode)}
-      const otherColors = ${JSON.stringify(otherColors)}
+      const __colorsByMode__ = ${JSON.stringify(colorsByMode)}
+      const __otherColors__ = ${JSON.stringify(otherColors)}
       window.addEventListener('DOMContentLoaded', ${boundFunc})
     <\/script>`
   /* eslint-enable no-useless-escape */

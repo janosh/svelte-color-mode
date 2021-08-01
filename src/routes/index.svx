@@ -69,7 +69,7 @@ You can hook whatever UI component you want up to the `colorMode` store. All tha
 
 ## Want to contribute?
 
-At present, `svelte-color-mode` contains just a single UI component for changing the color mode, `ModalColorPicker.svelte`. More are planned. If you have a good idea for color mode UI and would like to contribute it, please do! Implementation-wise, all it takes is to import the `colorMode` store (see `stores.ts`) and change its value.
+At present, `svelte-color-mode` contains just a few UI components for changing the color mode, all under `src/lib/*ColorPicker.svelte`. More are welcome. If you have a good idea for a color mode UI and would like to contribute it, please do! Implementation-wise, all it takes is to import the `colorMode` store (see `stores.ts`) and change its value based on user input.
 
 To submit a PR, clone the repo, install dependencies and start the dev server to try out your changes.
 
