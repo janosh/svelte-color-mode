@@ -3,7 +3,7 @@
 
   import { colorMode, colorModeKey } from './stores'
 
-  export let colorsByMode: Record<string, Record<string, string>>
+  export let colorsByMode: Record<string, Record<string, string | number>>
   export let otherColors: Record<string, string> = {}
   export let noKeyboardShortcuts = false
 
