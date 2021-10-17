@@ -8,7 +8,7 @@
   export let noKeyboardShortcuts = false
 
   // Rename component props to prevent AcornJS from deduplicating variables
-  // in applyColors e.g. colorsByMode to colorsByMode2. This oocur if e.g.
+  // in applyColors e.g. colorsByMode to colorsByMode2. This occurs if e.g.
   // the user had a colors.js module with export const colorsByMode in it.
   // colorsByMode2 would break the script this component adds to <svelte:head>.
   $: __colorsByMode__ = colorsByMode
@@ -41,8 +41,7 @@
 
     // Define CSS vars for moded colors (both during SSR and in production).
     for (const [key, val] of Object.entries(__colorsByMode__[activeMode])) {
-      if (!val) console.error(`colorsByMode has invalid value ${val} for key '${key}'`)
-      document.body.style.setProperty(`--${key}`, val)
+      document.body.style.setProperty(`--${key}`, `${val}`)
     }
 
     // Define CSS vars for non-moded colors as well while we're at it
