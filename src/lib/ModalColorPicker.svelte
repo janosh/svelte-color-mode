@@ -28,13 +28,16 @@
     <div>
       <button on:click={setModeFactory(`light`)} class="choice light">
         <Sun />
-        {lightName}</button>
+        {lightName}</button
+      >
       <button on:click={setModeFactory(`dark`)} class="choice dark">
         <Moon color="yellow" />
-        {darkName}</button>
+        {darkName}</button
+      >
       <button on:click={setModeFactory(`auto`)} class="choice auto">
         <BrightnessAuto color="black" />
-        {autoName}</button>
+        {autoName}</button
+      >
     </div>
   </Modal>
 {/if}
