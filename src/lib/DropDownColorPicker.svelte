@@ -1,8 +1,8 @@
 <script>
-  import { colorMode } from './stores'
-  import Sun from './icons/Sun.svelte'
-  import Moon from './icons/Moon.svelte'
   import BrightnessAuto from './icons/BrightnessAuto.svelte'
+  import Moon from './icons/Moon.svelte'
+  import Sun from './icons/Sun.svelte'
+  import { colorMode } from './stores'
 
   const icons = {
     dark: Moon,

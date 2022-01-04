@@ -1,11 +1,10 @@
 <script>
-  import ModalColorPicker from '../lib/ModalColorPicker.svelte'
-  import DropDownColorPicker from '../lib/DropDownColorPicker.svelte'
-  import MinimalColorPicker from '../lib/MinimalColorPicker.svelte'
   import ColorMode from '../lib/ColorMode.svelte'
-  import GitHubCorner from '../components/GitHubCorner.svelte'
-
   import { colorsByMode, colors } from '../colors'
+  import DropDownColorPicker from '../lib/DropDownColorPicker.svelte'
+  import GitHubCorner from '../components/GitHubCorner.svelte'
+  import MinimalColorPicker from '../lib/MinimalColorPicker.svelte'
+  import ModalColorPicker from '../lib/ModalColorPicker.svelte'
 </script>
 
 <ColorMode {colorsByMode} otherColors={colors} />

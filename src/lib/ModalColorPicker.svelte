@@ -1,9 +1,9 @@
 <script lang="ts">
+  import BrightnessAuto from './icons/BrightnessAuto.svelte'
+  import Moon from './icons/Moon.svelte'
+  import Sun from './icons/Sun.svelte'
   import Modal from './Modal.svelte'
   import { colorMode } from './stores'
-  import Sun from './icons/Sun.svelte'
-  import Moon from './icons/Moon.svelte'
-  import BrightnessAuto from './icons/BrightnessAuto.svelte'
 
   export let iconSize = `1em`
   export let ariaLabelBtnOpener = `Open color mode picker`
@@ -28,16 +28,16 @@
     <div>
       <button on:click={setModeFactory(`light`)} class="choice light">
         <Sun />
-        {lightName}</button
-      >
+        {lightName}
+      </button>
       <button on:click={setModeFactory(`dark`)} class="choice dark">
         <Moon color="yellow" />
-        {darkName}</button
-      >
+        {darkName}
+      </button>
       <button on:click={setModeFactory(`auto`)} class="choice auto">
         <BrightnessAuto color="black" />
-        {autoName}</button
-      >
+        {autoName}
+      </button>
     </div>
   </Modal>
 {/if}
