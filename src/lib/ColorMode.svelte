@@ -1,6 +1,5 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-
   import { colorMode, colorModeKey } from './stores'
 
   export let colorsByMode: Record<string, Record<string, string | number>>
